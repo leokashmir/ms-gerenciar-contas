@@ -1,0 +1,17 @@
+server:
+  port: 8081
+spring:
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+
+jwt:
+  secret: 4pE8z3PBoHjnV1AhvGk+e8h2p+ShZpOnpr8cwHmMh1w=4pE8z3PBoHjnV1AhvGk+e8h2p+ShZpOnpr8cwHmMh1w=
+
+projeto:
+  application:
+    description: '@project.description@'
+    version: '@project.version@'

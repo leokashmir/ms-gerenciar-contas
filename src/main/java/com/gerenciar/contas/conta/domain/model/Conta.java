@@ -1,6 +1,6 @@
-package com.gerenciar.contas.domain.model;
+package com.gerenciar.contas.conta.domain.model;
 
-import com.gerenciar.contas.domain.enums.Situacao;
+import com.gerenciar.contas.conta.domain.enums.Situacao;
 import jakarta.persistence.*;
 import lombok.*;
 

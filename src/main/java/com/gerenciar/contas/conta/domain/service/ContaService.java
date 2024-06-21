@@ -1,8 +1,8 @@
-package com.gerenciar.contas.domain.service;
+package com.gerenciar.contas.conta.domain.service;
 
-import com.gerenciar.contas.domain.enums.Situacao;
-import com.gerenciar.contas.domain.model.Conta;
-import com.gerenciar.contas.domain.repository.ContaRepository;
+import com.gerenciar.contas.conta.domain.enums.Situacao;
+import com.gerenciar.contas.conta.domain.model.Conta;
+import com.gerenciar.contas.conta.domain.repository.ContaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +34,8 @@ public class ContaService {
         Conta conta = contaRepository.findById(id).orElseThrow(() -> new RuntimeException("Conta não encontrada"));
         conta.setSituacao(situacao);
         contaRepository.save(conta);
+    }
+    public void saveAll(List<Conta> contasList) {
+        contaRepository.saveAll(contasList);
     }
 }

@@ -1,6 +1,6 @@
-package com.gerenciar.contas.domain.repository;
+package com.gerenciar.contas.conta.domain.repository;
 
-import com.gerenciar.contas.domain.model.Conta;
+import com.gerenciar.contas.conta.domain.model.Conta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
