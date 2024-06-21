@@ -93,12 +93,12 @@ Response:
 ```http
   GET /api/v1/contas/find/all
 ```
-* Busca por todas a contas já cadastradas
+* Realizar uma busca pagianda por todas a contas já cadastradas
 
- | Descrição                             |
-|:--------------------------------------|
- | Retorna um alista de todas as contas. |
-
+| Parametro    | Tipo   | Descrição        |
+|:-------------|:-------|:-----------------|
+| `pageNumber` | `int ` | Numero da Pagina |
+| `pageSize`   | `int ` | Numero de elementos na Pagina|
 
 <br>
 
