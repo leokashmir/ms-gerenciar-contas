@@ -32,41 +32,143 @@ Se for executar a aplicação fora do conteiner ela esta rondando na porta 8081.
 ``` 
 Comando para executar no docker => docker compose up --build 
 ```
+## API - Autenticação
+```http
+  POST /api/v1/auth
+```
+* Obtem o Token(Bearer) Jwt de acesso <br>
 
+```
+Request Body:
 
-## API
+ {
+  "username":"master",
+  "password":"master"
+ } 
+    
+Response: 
+ {
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXN0ZXIiLCJpYXQiOjE3MTg5OTY2NjgsImV4cCI6MTcxODk5ODU2OH0.I3BmbkgE6kyDjf-7JFGJiI0vKEmgo3xOkVYKRI1317cXK6SxcyKCgg7fyDFe-2iFMOYV5keXpUUcZ32nJICoSQ"
+ }               
+```
+
+* Autenticaçao da Api é via Header -> Authorization.
+
+```
+ Authorization :  Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXN0ZXIiLC...
+```
+
+## API - Contas
+
 
 ```http
   POST /api/v1/contas/create
 ```
+* Cadastra uma nova conta <br>
+<b>Body</b> - Objeto Json representando uma entidade Conta.
+```
+    {
+        "dataVencimento": "2024-06-01",
+        "dataPagamento":"2024-06-02",
+         "valor": 159.78,
+         "descricao": "Luz",
+         "situacao": "PAGA"
+    }             
+```
+
 <br>
 
 ```http
   GET /api/v1/contas/find/{id}
 ```
+* Busca uma conta especifica pelo ID da mesma.
+
+| Parametro    | Tipo         | Descrição                                                                                 |
+|:-------------|:-------------|:------------------------------------------------------------------------------------------|
+| `id`         | `int `       | Id de indentificação da conta                                                             |
+
+
 <br>
 
 ```http
   GET /api/v1/contas/find/all
 ```
+* Realizar uma busca pagianda por todas a contas já cadastradas
+
+| Parametro    | Tipo   | Descrição        |
+|:-------------|:-------|:-----------------|
+| `pageNumber` | `int ` | Numero da Pagina |
+| `pageSize`   | `int ` | Numero de elementos na Pagina|
+
 <br>
 
 ```http
   PUT /api/v1/contas/update/{id}
 ```
+
+* Realizar uma atualização de toda a conta.
+
+| Parametro    | Tipo         | Descrição                                                                                 |
+|:-------------|:-------------|:------------------------------------------------------------------------------------------|
+| `id`         | `int `       | Id de indentificação da conta                                                             |
+
+<b>Body</b> - Objeto Json representando uma entidade Conta.
+```
+    {
+        "dataVencimento": "2024-06-01",
+        "dataPagamento":"2024-06-02",
+         "valor": 159.78,
+         "descricao": "Luz",
+         "situacao": "PAGA"
+    }             
+```
+
+
 <br>
 
 ```http
   DELETE /api/v1/contas/delete/{id}
 ```
+
+* Exclui uma conta através do Id.
+
+| Parametro            | Tipo      | Descrição                                                                                 |
+|:---------------------|:----------|:------------------------------------------------------------------------------------------|
+| `id`                 | `int `    | Id de indentificação da conta                                                             |
+
+
 <br>
 
 ```http
   PATCH /api/v1/contas/update/{id}
 ```
+* Realiza Update da Situação da conta. PAGA ou PENDENTE
+
+| Parametro            | Tipo      | Descrição                                                                                 |
+|:---------------------|:----------|:------------------------------------------------------------------------------------------|
+| `id`                 | `int `    | Id de indentificação da conta                                                             |
+| `situacao`           | `string ` | Situação da conta PAGA ou PENDENTE                                                        |
+                                                        |
+
 <br>
 
 ```http
-  POST /api/v1/contas/upload/csv
+  POST /api/v1/contas/upload/csv     
 ```
+* Realizar upload de um arquivo CSV contendo dados de contas, separados por ";".
+* Campos do arquivo: dataVencimento,dataPagamento,valor,descricao,situacao
+
+| Parametro | Tipo               | Descrição                                  |
+|:----------|:-------------------|:-------------------------------------------|
+| `file`    | `string ($binary)` | Realiza o Upload de um arquivo do tipo CSV |
 <br>
+
+
+
+
+## Author
+
+
+[@leokashmir](https://www.github.com/leokashmir)
+
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/leokashmir/)
