@@ -11,6 +11,8 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -51,9 +53,8 @@ public class ContaApplicationService {
         return contaService.findById(id);
     }
 
-    public List<Conta> findAll() {
-
-        return contaService.findAll();
+    public Page findAll(Pageable page) {
+        return contaService.findAll(page);
     }
 
     public void deleteById(Long id) {

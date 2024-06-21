@@ -6,6 +6,8 @@ import com.gerenciar.contas.conta.domain.model.Conta;
 import com.gerenciar.contas.conta.service.ContaApplicationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,8 +40,12 @@ public class ContaController {
     }
 
     @GetMapping("/find/all")
-    public ResponseEntity<List<Conta>> getAllContas(Pageable pageable) {
-        return new ResponseEntity<>(contaApplicationService.findAll(), HttpStatus.OK);
+    public ResponseEntity<Page> getAllContas(
+            @RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber,
+            @RequestParam(value = "pageSize", defaultValue = "20") int pageSize) {
+
+        Pageable page = PageRequest.of(pageNumber, pageSize);
+        return new ResponseEntity<>(contaApplicationService.findAll(page), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
