@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15
+    container_name: contas_db
+    environment:
+      POSTGRES_DB: contas
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  flyway:
+    image: flyway/flyway:8.5.13
+    container_name: flyway_migration
+    command: -url=jdbc:postgresql://db:5432/contas -schemas=public -user=postgres -password=postgres -connectRetries=60 migrate
+    volumes:
+      - ./src/main/resources/db/migration:/flyway/sql
+    depends_on:
+      - db
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: contas_app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/contas
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
