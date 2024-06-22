@@ -3,6 +3,7 @@ package com.gerenciar.contas.conta.domain.service;
 import com.gerenciar.contas.conta.domain.enums.Situacao;
 import com.gerenciar.contas.conta.domain.model.Conta;
 import com.gerenciar.contas.conta.domain.repository.ContaRepository;
+import com.gerenciar.contas.conta.domain.repository.query.specifications.ContaSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,8 @@ public class ContaService {
     @Autowired
     private ContaRepository contaRepository;
 
+    private ContaSpecification contaSpecification;
+
     public Conta save(Conta conta) {
         return contaRepository.save(conta);
     }
@@ -25,8 +28,9 @@ public class ContaService {
         return contaRepository.findById(id);
     }
 
-    public Page<Conta> findAll(Pageable page) {
-        return contaRepository.findAll(page);
+    public Page<Conta> findAll(Pageable page, Conta conta) {
+        contaSpecification = new ContaSpecification(conta);
+        return contaRepository.findAll(contaSpecification.dinamicQuery(), page);
     }
 
     public void deleteById(Long id) {
