@@ -53,8 +53,9 @@ public class ContaApplicationService {
         return contaService.findById(id);
     }
 
-    public Page findAll(Pageable page) {
-        return contaService.findAll(page);
+    public Page findAll(Pageable page, String descricao, LocalDate dataVencimento) {
+        return contaService.findAll(page, Conta.builder().descricao(descricao)
+                .dataVencimento(dataVencimento).build());
     }
 
     public void deleteById(Long id) {

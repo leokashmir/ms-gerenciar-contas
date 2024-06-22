@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,13 +40,16 @@ public class ContaController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/find/all")
+    @GetMapping("/find")
     public ResponseEntity<Page> getAllContas(
+            @RequestParam(value = "descricao", required = false) String descricao,
+            @RequestParam(value = "dataVencimento", required = false) LocalDate dataVencimento,
             @RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber,
             @RequestParam(value = "pageSize", defaultValue = "20") int pageSize) {
 
         Pageable page = PageRequest.of(pageNumber, pageSize);
-        return new ResponseEntity<>(contaApplicationService.findAll(page), HttpStatus.OK);
+
+        return new ResponseEntity<>(contaApplicationService.findAll(page, descricao, dataVencimento), HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")

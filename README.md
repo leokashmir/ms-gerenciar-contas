@@ -91,14 +91,17 @@ Response:
 <br>
 
 ```http
-  GET /api/v1/contas/find/all
+  GET /api/v1/contas/find
 ```
-* Realizar uma busca pagianda por todas a contas já cadastradas
+* Realizar uma busca pagianda e pelos filtros de Data de Vencimento e Descrição 
+em todas a contas já cadastradas
 
-| Parametro    | Tipo   | Descrição        |
-|:-------------|:-------|:-----------------|
-| `pageNumber` | `int ` | Numero da Pagina |
-| `pageSize`   | `int ` | Numero de elementos na Pagina|
+| Parametro        | Tipo      | Descrição                     |
+|:-----------------|:----------|:------------------------------|
+| `pageNumber`     | `int `    | Numero da Pagina              |
+| `pageSize`       | `int `    | Numero de elementos na Pagina |
+| `descricao`      | `String ` | Descrição da conta            |
+| `dataVencimento` | `String ` | Data de vencimento            |
 
 <br>
 
