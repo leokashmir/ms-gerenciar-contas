@@ -91,7 +91,7 @@ Response:
 <br>
 
 ```http
-  GET /api/v1/contas/find/all
+  GET /api/v1/contas/find
 ```
 * Realizar uma busca pagianda e pelos filtros de Data de Vencimento e Descrição 
 em todas a contas já cadastradas

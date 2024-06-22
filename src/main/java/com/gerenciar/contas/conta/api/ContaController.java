@@ -40,7 +40,7 @@ public class ContaController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/find/all")
+    @GetMapping("/find")
     public ResponseEntity<Page> getAllContas(
             @RequestParam(value = "descricao", required = false) String descricao,
             @RequestParam(value = "dataVencimento", required = false) LocalDate dataVencimento,
