@@ -1,6 +1,7 @@
 package com.gerenciar.contas.conta.api;
 
 import com.gerenciar.contas.conta.api.dto.ContaDTO;
+import com.gerenciar.contas.conta.api.dto.TotalDTO;
 import com.gerenciar.contas.conta.domain.enums.Situacao;
 import com.gerenciar.contas.conta.domain.model.Conta;
 import com.gerenciar.contas.conta.service.ContaApplicationService;
@@ -78,5 +79,16 @@ public class ContaController {
 
         contaApplicationService.tratamentoArquivo(file);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    @GetMapping("/totalPago")
+    public ResponseEntity<TotalDTO> getContaById(
+            @RequestParam(value = "dataInicio", required = false) LocalDate dataInicio,
+            @RequestParam(value = "dataFim", required = false) LocalDate dataFim
+    ) {
+        var total = contaApplicationService.getSumByBetweenDate(dataInicio,dataFim);
+        return  new ResponseEntity<>(total, HttpStatus.OK);
+
     }
 }
