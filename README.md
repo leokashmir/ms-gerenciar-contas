@@ -167,6 +167,17 @@ em todas a contas já cadastradas
 <br>
 
 
+```http
+  GET /api/v1/contas/totalPago
+```
+* Realizar uma busca pelo valor total ja gastos em contas, com intervalo de datas.
+
+| Parametro        | Tipo    | Descrição                           |
+|:-----------------|:--------|:------------------------------------|
+| `dataInicio`     | `date ` | Filtro Inicio da data para pesquisa |
+| `dataFim`       | `date ` | Filtro Fim da data para pesquisa    |
+
+
 
 
 ## Author
