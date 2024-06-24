@@ -1,6 +1,7 @@
 package com.gerenciar.contas.conta.service;
 
 import com.gerenciar.contas.conta.api.dto.ContaDTO;
+import com.gerenciar.contas.conta.api.dto.TotalDTO;
 import com.gerenciar.contas.conta.converter.ContaDtoToContaConverter;
 import com.gerenciar.contas.conta.domain.enums.Situacao;
 import com.gerenciar.contas.conta.domain.model.Conta;
@@ -96,5 +97,10 @@ public class ContaApplicationService {
         contaService.saveAll(contasList);
     }
 
+    public TotalDTO getSumByBetweenDate(LocalDate dataInicio, LocalDate dataFim){
+         return TotalDTO.builder()
+                 .totalPagoPeriodo(contaService.getSumByBetweenDate(dataInicio, dataFim))
+                 .build();
+    }
 
 }

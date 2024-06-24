@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,5 +44,9 @@ public class ContaService {
     }
     public void saveAll(List<Conta> contasList) {
         contaRepository.saveAll(contasList);
+    }
+
+    public Double getSumByBetweenDate(LocalDate dataInicio, LocalDate dataFim){
+        return contaRepository.getSumByBetweenDate(dataInicio, dataFim);
     }
 }
