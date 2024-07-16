@@ -27,8 +27,8 @@ a API. E para a gestão do banco de dados é utlizado o Flayway.
 
 ## Executar o Projeto
 Pode-se executar o projeto atraves do Docker Composer. Ira ser criado um conteiner
-com todos os serviços. A Aplicação roda na porta 8080. 
-Se for executar a aplicação fora do conteiner ela esta rondando na porta 8081.
+com todos os serviços. A Aplicação roda em http:\\localhost:8080. 
+
 ``` 
 Comando para executar no docker => docker compose up --build 
 ```
