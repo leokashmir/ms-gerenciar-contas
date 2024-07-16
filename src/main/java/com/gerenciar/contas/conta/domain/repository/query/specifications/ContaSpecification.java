@@ -18,10 +18,11 @@ public class ContaSpecification {
     public Specification<Conta> dinamicQuery(){
         return (root, query, builder) -> {
             List<Predicate> predicates = new ArrayList();
+            StringBuilder sb = new StringBuilder();
 
             if(conta.getDescricao() != null && !conta.getDescricao().isEmpty() ){
                 Path<String> campoDescricao = root.get("descricao");
-                Predicate predicateDescricao = builder.like(campoDescricao, STR."%\{conta.getDescricao()}%");
+                Predicate predicateDescricao = builder.like(campoDescricao, "%{"+ conta.getDescricao() +"}%");
                 predicates.add(predicateDescricao);
             }
             if(conta.getDataVencimento() != null){
