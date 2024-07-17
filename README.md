@@ -24,6 +24,7 @@ a API. E para a gestão do banco de dados é utlizado o Flayway.
 - JUnit           -> https://junit.org/
 - Mockito         -> https://site.mockito.org/
 - Flyway          -> https://flywaydb.org/
+- Swagger         -> https://swagger.io/
 
 ## Executar o Projeto
 Pode-se executar o projeto atraves do Docker Composer. Ira ser criado um conteiner
@@ -249,6 +250,10 @@ em todas a contas já cadastradas
 Folder: Collection
 <br><br>
 File: API - Gerenciar Contas V1.postman_collection.json
+
+## Swagger
+
+http://localhost:8080/swagger-ui/index.html
 
 ## Author
 
