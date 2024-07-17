@@ -1,5 +1,9 @@
 package com.gerenciar.contas.autenticacao.infrastructure.config;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +22,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
+@OpenAPIDefinition(security = @SecurityRequirement(name = "bearerAuth"))
+@SecurityScheme(
+        name = "bearerAuth",
+        type = SecuritySchemeType.HTTP,
+        scheme = "bearer",
+        bearerFormat = "JWT"
+)
 public class WebSecurityConfig  {
     private final JwtRequestFilter jwtRequestFilter;
 
@@ -31,6 +42,8 @@ public class WebSecurityConfig  {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
