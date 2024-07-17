@@ -5,6 +5,7 @@ import com.gerenciar.contas.conta.api.dto.TotalDTO;
 import com.gerenciar.contas.conta.domain.enums.Situacao;
 import com.gerenciar.contas.conta.domain.model.Conta;
 import com.gerenciar.contas.conta.service.ContaApplicationService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +23,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/contas")
+@SecurityRequirement(name = "bearerAuth")
 public class ContaController {
 
     @Autowired
