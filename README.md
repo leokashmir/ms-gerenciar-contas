@@ -39,6 +39,14 @@ Comando para executar no docker => docker compose up --build
 * Obtem o Token(Bearer) Jwt de acesso <br>
 
 ```
+ curl --location 'localhost:8080/api/auth' \
+--header 'Content-Type: application/json' \
+--data '{
+    "username":"master",
+    "password":"master"
+}'
+
+Exemplo:
 Request Body:
 
  {
@@ -49,7 +57,11 @@ Request Body:
 Response: 
  {
     "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXN0ZXIiLCJpYXQiOjE3MTg5OTY2NjgsImV4cCI6MTcxODk5ODU2OH0.I3BmbkgE6kyDjf-7JFGJiI0vKEmgo3xOkVYKRI1317cXK6SxcyKCgg7fyDFe-2iFMOYV5keXpUUcZ32nJICoSQ"
- }               
+ }  
+ 
+
+
+             
 ```
 
 * Autenticaçao da Api é via Header -> Authorization.
@@ -75,6 +87,18 @@ Response:
          "situacao": "PAGA"
     }             
 ```
+* Curl
+
+        curl --location 'localhost:8080/api/v1/contas/create' \
+        --header 'Content-Type: application/json' \
+        --header 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXN0ZXIiLCJpYXQiOjE3MTg5...' \
+        --data '{
+        "dataVencimento": "2024-06-01",
+        "dataPagamento":"2024-06-02",
+        "valor": 159.78,
+        "descricao": "Luz",
+        "situacao": "PAGA"
+        } '
 
 <br>
 
@@ -87,7 +111,12 @@ Response:
 |:-------------|:-------------|:------------------------------------------------------------------------------------------|
 | `id`         | `int `       | Id de indentificação da conta                                                             |
 
+* Curl
+  
+        curl --location 'localhost:8080/api/v1/contas/find/2' \
+        --header 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...'
 
+<br>
 <br>
 
 ```http
@@ -104,6 +133,12 @@ em todas a contas já cadastradas
 | `dataVencimento` | `String ` | Data de vencimento            |
 
 <br>
+
+* Curl: 
+
+      curl --location 'localhost:8080/api/v1/contas/find?pageNumber=0&pageSize=05&dataVencimento=2024-05-02&descricao=Produto' \
+      --header 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXN0ZXIiLCJ...' \
+      --data ''
 
 ```http
   PUT /api/v1/contas/update/{id}
@@ -126,7 +161,18 @@ em todas a contas já cadastradas
     }             
 ```
 
+* Curl
 
+      curl --location --request PUT 'localhost:8080/api/v1/contas/update/1' \
+      --header 'Content-Type: application/json' \
+      --header 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...' \
+      --data '{
+      "dataVencimento": "2024-06-01",
+      "dataPagamento":"2024-06-02",
+      "valor": 159.78,
+      "descricao": "Luz",
+      "situacao": "PAGA"
+      }    '
 <br>
 
 ```http
@@ -139,7 +185,11 @@ em todas a contas já cadastradas
 |:---------------------|:----------|:------------------------------------------------------------------------------------------|
 | `id`                 | `int `    | Id de indentificação da conta                                                             |
 
+* Curl
 
+        curl --location --request DELETE 'localhost:8080/api/v1/contas/delete/1' \
+        --header 'Authorization: Bearer eyJhbGciOiJIUzUxMi...'
+<br>
 <br>
 
 ```http
@@ -153,6 +203,12 @@ em todas a contas já cadastradas
 | `situacao`           | `string ` | Situação da conta PAGA ou PENDENTE                                                        |
                                                         |
 
+* Curl
+
+      curl --location --request PATCH 'localhost:8080/api/v1/contas/update/2?situacao=PENDENTE' \
+      --header 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...'
+
+<br>
 <br>
 
 ```http
@@ -166,6 +222,13 @@ em todas a contas já cadastradas
 | `file`    | `string ($binary)` | Realiza o Upload de um arquivo do tipo CSV |
 <br>
 
+* Curl
+
+        curl --location 'localhost:8080/api/v1/contas/upload/csv' \
+        --header 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...' \
+        --form 'file=@"/C:/Users/leona/Downloads/Pedidos(Planilha1).csv"'
+<br>
+<br>
 
 ```http
   GET /api/v1/contas/totalPago
@@ -177,7 +240,12 @@ em todas a contas já cadastradas
 | `dataInicio`     | `date ` | Filtro Inicio da data para pesquisa |
 | `dataFim`       | `date ` | Filtro Fim da data para pesquisa    |
 
+ * Curl
+   
+        curl --location 'localhost:8080/api/v1/contas/totalPago?dataInicio=2024-05-01&dataFim=2024-06-24' \
+         --header 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...'
 
+## Collections
 
 
 ## Author
