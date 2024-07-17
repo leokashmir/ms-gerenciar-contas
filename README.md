@@ -246,7 +246,9 @@ em todas a contas já cadastradas
          --header 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...'
 
 ## Collections
-
+Folder: Collection
+<br><br>
+File: API - Gerenciar Contas V1.postman_collection.json
 
 ## Author
 
